@@ -24,6 +24,10 @@ export const metadata: Metadata = {
     "Next.js",
     "Node.js",
   ],
+  icons: {
+    icon: "/broswer.png",
+    apple: "/broswer.png",
+  },
 };
 
 export default function RootLayout({
