@@ -21,7 +21,7 @@ const translations = {
 
     // Hero
     "hero.role": "Fullstack Developer",
-    "hero.location": "Based in Recife, Brazil",
+    "hero.location": "Made in Recife, Brazil",
     "hero.copyright": "Portfolio © 2026",
     "hero.scroll": "Scroll to Explore",
     "hero.subtitle": "Fullstack Developer & Creative Technologist",
@@ -89,7 +89,7 @@ const translations = {
 
     // Hero
     "hero.role": "Desenvolvedor Fullstack",
-    "hero.location": "Baseado em Recife, PE",
+    "hero.location": "Made in Recife, PE",
     "hero.copyright": "Portfólio © 2026",
     "hero.scroll": "Role para Explorar",
     "hero.subtitle": "Desenvolvedor Fullstack & Tecnologista Criativo",
