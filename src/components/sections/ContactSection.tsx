@@ -56,7 +56,7 @@ export default function ContactSection() {
               <MagneticButton>
                 <a
                   href="mailto:cantalusto@gmail.com"
-                  className="text-xl md:text-2xl hover:text-accent transition-colors duration-300 hoverable"
+                  className="text-base md:text-2xl hover:text-accent transition-colors duration-300 hoverable break-all"
                 >
                   cantalusto@gmail.com
                 </a>
@@ -73,7 +73,7 @@ export default function ContactSection() {
               <MagneticButton>
                 <a
                   href="tel:+5581986875695"
-                  className="text-xl md:text-2xl hover:text-accent transition-colors duration-300 hoverable"
+                  className="text-base md:text-2xl hover:text-accent transition-colors duration-300 hoverable"
                 >
                   (81) 98687-5695
                 </a>
@@ -87,7 +87,7 @@ export default function ContactSection() {
               <span className="text-xs font-mono uppercase tracking-widest text-muted block mb-4">
                 {t("contact.location")}
               </span>
-              <p className="text-xl md:text-2xl">Recife, PE – Brasil</p>
+              <p className="text-base md:text-2xl">Recife, PE – Brasil</p>
             </div>
           </LineReveal>
         </div>

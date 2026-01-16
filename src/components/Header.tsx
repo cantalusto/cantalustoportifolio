@@ -1,25 +1,44 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import MagneticButton from "./MagneticButton";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function Header() {
   const { language, setLanguage, t } = useLanguage();
   const [activeSection, setActiveSection] = useState("");
+  const [showName, setShowName] = useState(false);
 
   const navItems = [
-    { key: "work", label: t("nav.work") },
+    { key: "hero", label: language === "pt" ? "Início" : "Home" },
     { key: "about", label: t("nav.about") },
     { key: "services", label: t("nav.services") },
     { key: "contact", label: t("nav.contact") },
   ];
 
+  const sectionLabels: { [key: string]: string } = {
+    work: language === "pt" ? "trabalhos/" : "work/",
+    about: language === "pt" ? "sobre/" : "about/",
+    services: language === "pt" ? "serviços/" : "services/",
+    contact: language === "pt" ? "contato/" : "contact/",
+    gallery: language === "pt" ? "galeria/" : "gallery/",
+  };
+
   useEffect(() => {
     const handleScroll = () => {
-      const sections = navItems.map((item) => item.key);
+      const sections = ["hero", "work", "gallery", "about", "services", "contact"];
       const scrollPosition = window.scrollY + window.innerHeight / 3;
+      const heroHeight = window.innerHeight;
+
+      // Show name after leaving hero
+      setShowName(window.scrollY > heroHeight * 0.5);
+
+      // If at top, set hero as active
+      if (window.scrollY < heroHeight * 0.5) {
+        setActiveSection("hero");
+        return;
+      }
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = document.getElementById(sections[i]);
@@ -31,11 +50,11 @@ export default function Header() {
           }
         }
       }
-      setActiveSection("");
+      setActiveSection("hero");
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Initial check
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -46,22 +65,120 @@ export default function Header() {
       animate={{ y: 0 }}
       transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
     >
-      <nav className="flex items-center justify-between px-6 md:px-12 py-6">
-        <MagneticButton>
-          <a
-            href="#"
-            className="text-white text-sm font-medium tracking-wider uppercase"
-          >
-            CantaLusto
-            <span className="text-white/70 text-xs ml-2">Developer</span>
-          </a>
-        </MagneticButton>
+      {/* Mobile Header */}
+      <nav className="md:hidden flex items-center justify-between px-4 py-4">
+        <div className="flex-1">
+          <AnimatePresence mode="wait">
+            {showName ? (
+              <motion.a
+                key="name"
+                href="#"
+                className="text-white text-sm font-bold tracking-wider uppercase"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.3 }}
+              >
+                CANTALUSTO
+              </motion.a>
+            ) : (
+              <motion.span
+                key="section"
+                className="text-white text-sm font-medium italic"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.3 }}
+              >
+                {activeSection ? sectionLabels[activeSection] : ""}
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </div>
 
-        <div className="hidden md:flex items-center gap-12">
+        {/* Mobile Section indicator when name is showing */}
+        <AnimatePresence>
+          {showName && activeSection && (
+            <motion.span
+              className="text-white/70 text-xs font-medium italic mr-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {sectionLabels[activeSection]}
+            </motion.span>
+          )}
+        </AnimatePresence>
+
+        {/* Language Toggle Mobile */}
+        <div className="flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider">
+          <button
+            onClick={() => setLanguage("pt")}
+            className={`px-1.5 py-1 rounded transition-colors duration-300 ${
+              language === "pt"
+                ? "bg-white text-black"
+                : "text-white/70"
+            }`}
+          >
+            PT
+          </button>
+          <span className="text-white/50">/</span>
+          <button
+            onClick={() => setLanguage("en")}
+            className={`px-1.5 py-1 rounded transition-colors duration-300 ${
+              language === "en"
+                ? "bg-white text-black"
+                : "text-white/70"
+            }`}
+          >
+            EN
+          </button>
+        </div>
+      </nav>
+
+      {/* Desktop Header */}
+      <nav className="hidden md:flex items-center justify-between px-12 py-6">
+        <div className="min-w-[200px] h-6 flex items-center">
+          <AnimatePresence mode="wait">
+            {showName && (
+              <MagneticButton>
+                <motion.a
+                  key="name-desktop"
+                  href="#"
+                  className="text-white text-sm font-medium tracking-wider uppercase"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  CantaLusto
+                  <span className="text-white/70 text-xs ml-2">Developer</span>
+                </motion.a>
+              </MagneticButton>
+            )}
+          </AnimatePresence>
+        </div>
+
+        <div className="flex items-center gap-12">
           {navItems.map((item, index) => (
             <MagneticButton key={index}>
               <motion.a
                 href={`#${item.key}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  const target = item.key === "hero" 
+                    ? document.body 
+                    : document.getElementById(item.key);
+                  if (target) {
+                    const targetPosition = item.key === "hero" 
+                      ? 0 
+                      : target.getBoundingClientRect().top + window.scrollY;
+                    window.scrollTo({
+                      top: targetPosition,
+                      behavior: "smooth"
+                    });
+                  }
+                }}
                 className={`text-sm font-medium tracking-wider uppercase relative overflow-hidden group ${
                   activeSection === item.key ? "text-white" : "text-white/60"
                 }`}
@@ -83,7 +200,7 @@ export default function Header() {
         </div>
 
         <div className="flex items-center gap-4">
-          {/* Language Toggle */}
+          {/* Language Toggle Desktop */}
           <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider">
             <button
               onClick={() => setLanguage("pt")}
@@ -107,13 +224,6 @@ export default function Header() {
               EN
             </button>
           </div>
-
-          <MagneticButton>
-            <button className="flex flex-col gap-[6px] p-2 md:hidden">
-              <span className="w-6 h-[2px] bg-white"></span>
-              <span className="w-6 h-[2px] bg-white"></span>
-            </button>
-          </MagneticButton>
         </div>
       </nav>
     </motion.header>

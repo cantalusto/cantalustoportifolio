@@ -8,12 +8,6 @@ import { useLanguage } from "@/context/LanguageContext";
 
 const galleryImages = [
   {
-    src: "/investapp.png",
-    title: "InvestNest App",
-    categoryEn: "Investment Platform • Laravel, Vue.js",
-    categoryPt: "Plataforma de Investimentos • Laravel, Vue.js",
-  },
-  {
     src: "/falaquegasto.png",
     title: "Fala Que Gasto",
     categoryEn: "Finance App • React, TypeScript",

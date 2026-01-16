@@ -63,15 +63,16 @@ export default function HeroSection() {
 
   return (
     <section
+      id="hero"
       ref={containerRef}
       className="relative h-screen flex flex-col items-center justify-center overflow-hidden border-b border-border"
     >
       {/* Background grid */}
       <div className="absolute inset-0 grid-pattern" />
 
-      {/* Animated corner elements */}
+      {/* Animated corner elements - hidden on mobile */}
       <motion.div
-        className="absolute top-24 left-8 text-xs font-mono uppercase tracking-widest text-muted"
+        className="absolute top-24 left-8 text-xs font-mono uppercase tracking-widest text-muted hidden md:block"
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 1.5, duration: 0.6 }}
@@ -80,7 +81,7 @@ export default function HeroSection() {
       </motion.div>
 
       <motion.div
-        className="absolute top-24 right-8 text-xs font-mono uppercase tracking-widest text-muted"
+        className="absolute top-24 right-8 text-xs font-mono uppercase tracking-widest text-muted hidden md:block"
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 1.5, duration: 0.6 }}
@@ -89,7 +90,7 @@ export default function HeroSection() {
       </motion.div>
 
       <motion.div
-        className="absolute bottom-8 left-8 text-xs font-mono uppercase tracking-widest text-muted"
+        className="absolute bottom-8 left-8 text-xs font-mono uppercase tracking-widest text-muted hidden md:block"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.5, duration: 0.6 }}
@@ -98,7 +99,7 @@ export default function HeroSection() {
       </motion.div>
 
       <motion.div
-        className="absolute bottom-8 right-8 text-xs font-mono uppercase tracking-widest text-muted"
+        className="absolute bottom-8 right-8 text-xs font-mono uppercase tracking-widest text-muted hidden md:block"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.5, duration: 0.6 }}
@@ -139,7 +140,7 @@ export default function HeroSection() {
           initial="hidden"
           animate="visible"
         >
-          <p className="text-lg md:text-xl text-muted font-light tracking-wide">
+          <p className="text-lg md:text-xl font-light tracking-wide shimmer-text">
             {t("hero.subtitle")}
           </p>
         </motion.div>

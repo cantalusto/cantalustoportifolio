@@ -9,6 +9,16 @@ import { useLanguage } from "@/context/LanguageContext";
 const projects = [
   {
     id: 1,
+    title: "InvestNest App",
+    categoryEn: "Investment Platform • Laravel, Vue.js",
+    categoryPt: "Plataforma de Investimentos • Laravel, Vue.js",
+    descriptionEn: "Robust investment application",
+    descriptionPt: "Aplicação robusta para investimentos",
+    year: "2026",
+    image: "/investapp.png",
+  },
+  {
+    id: 2,
     title: "InvestNest",
     categoryEn: "Landing Page • Next.js",
     categoryPt: "Landing Page • Next.js",
@@ -18,7 +28,7 @@ const projects = [
     image: "/investlanding.png",
   },
   {
-    id: 2,
+    id: 3,
     title: "DigitalNest",
     categoryEn: "Institutional Website • Next.js",
     categoryPt: "Site Institucional • Next.js",
@@ -28,7 +38,7 @@ const projects = [
     image: "/digital.png",
   },
   {
-    id: 3,
+    id: 4,
     title: "Amigo Fiel",
     categoryEn: "Pet Platform • React, Node.js",
     categoryPt: "Plataforma Pet • React, Node.js",
@@ -38,7 +48,7 @@ const projects = [
     image: "/amigofiel.png",
   },
   {
-    id: 4,
+    id: 5,
     title: "Esperança",
     categoryEn: "Social Project • Web Application",
     categoryPt: "Projeto Social • Aplicação Web",
@@ -73,22 +83,22 @@ function ProjectCard({
   return (
     <motion.div
       ref={cardRef}
-      className="group relative border-b border-border py-8 md:py-12 hoverable"
+      className="group relative border-b border-border py-6 md:py-12 hoverable"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="grid grid-cols-12 gap-4 items-center">
+      <div className="flex flex-col md:grid md:grid-cols-12 gap-2 md:gap-4 md:items-center">
         {/* Number */}
-        <div className="col-span-1 hidden md:block">
+        <div className="hidden md:block md:col-span-1">
           <span className="text-xs font-mono text-muted">
             {String(index + 1).padStart(2, "0")}
           </span>
         </div>
 
         {/* Title */}
-        <div className="col-span-12 md:col-span-5">
+        <div className="md:col-span-5">
           <motion.h3
-            className="text-title md:text-headline"
+            className="text-2xl md:text-headline font-semibold"
             animate={{ x: isHovered ? 20 : 0 }}
             transition={{ duration: 0.3, ease: [0.25, 0.4, 0.25, 1] }}
           >
@@ -96,25 +106,19 @@ function ProjectCard({
           </motion.h3>
         </div>
 
-        {/* Category */}
-        <div className="col-span-6 md:col-span-3">
-          <span className="text-sm text-muted">{category}</span>
-        </div>
-
-        {/* Year */}
-        <div className="col-span-3 md:col-span-2">
-          <span className="text-sm font-mono text-muted">{project.year}</span>
-        </div>
-
-        {/* Arrow */}
-        <div className="col-span-3 md:col-span-1 text-right">
-          <motion.span
-            className="inline-block text-xl"
-            animate={{ x: isHovered ? 10 : 0, rotate: isHovered ? -45 : 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            →
-          </motion.span>
+        {/* Category and Year row on mobile */}
+        <div className="flex items-center justify-between md:contents">
+          <span className="text-xs md:text-sm text-muted md:col-span-3">{category}</span>
+          <div className="flex items-center gap-4">
+            <span className="text-xs md:text-sm font-mono text-muted md:col-span-2">{project.year}</span>
+            <motion.span
+              className="inline-block text-lg md:text-xl"
+              animate={{ x: isHovered ? 10 : 0, rotate: isHovered ? -45 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              →
+            </motion.span>
+          </div>
         </div>
       </div>
 

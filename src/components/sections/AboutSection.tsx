@@ -54,16 +54,16 @@ export default function AboutSection() {
             </LineReveal>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-8 pt-12 border-t border-border">
+            <div className="grid grid-cols-3 gap-4 md:gap-8 pt-12 border-t border-border">
               {[
                 { number: "2+", label: t("about.years") },
                 { number: "50+", label: t("about.projects") },
                 { number: "20+", label: t("about.clients") },
               ].map((stat, index) => (
                 <LineReveal key={index} delay={0.4 + index * 0.1}>
-                  <div>
-                    <span className="text-title block">{stat.number}</span>
-                    <span className="text-xs font-mono uppercase tracking-wider text-muted">
+                  <div className="text-center md:text-left">
+                    <span className="text-xl md:text-title block">{stat.number}</span>
+                    <span className="text-[10px] md:text-xs font-mono uppercase tracking-wider text-muted">
                       {stat.label}
                     </span>
                   </div>

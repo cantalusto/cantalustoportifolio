@@ -36,12 +36,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" className="noise-bg">
       <body className={`${inter.variable} antialiased`}>
         <LanguageProvider>
           <SmoothScroll>
             <CustomCursor />
-            <div className="noise" />
             {children}
           </SmoothScroll>
         </LanguageProvider>

@@ -1,5 +1,46 @@
 @import "tailwindcss";
 
+/* Shimmer text effect */
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    var(--muted) 0%,
+    var(--muted) 40%,
+    var(--foreground) 50%,
+    var(--muted) 60%,
+    var(--muted) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+/* Noise texture overlay */
+.noise-bg::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
 @font-face {
   font-family: 'Satoshi';
   src: url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap');
@@ -77,24 +118,39 @@ body {
 
 /* Text clamp utilities */
 .text-display {
-  font-size: clamp(3rem, 15vw, 12rem);
+  font-size: clamp(2.5rem, 12vw, 12rem);
   line-height: 0.85;
   letter-spacing: -0.05em;
   font-weight: 900;
 }
 
 .text-headline {
-  font-size: clamp(2rem, 8vw, 6rem);
-  line-height: 0.9;
+  font-size: clamp(1.75rem, 6vw, 6rem);
+  line-height: 0.95;
   letter-spacing: -0.04em;
   font-weight: 700;
 }
 
 .text-title {
-  font-size: clamp(1.5rem, 4vw, 3rem);
-  line-height: 1;
+  font-size: clamp(1.25rem, 3vw, 3rem);
+  line-height: 1.1;
   letter-spacing: -0.03em;
   font-weight: 600;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  * {
+    cursor: auto;
+  }
+  
+  .text-display {
+    font-size: clamp(2rem, 14vw, 4rem);
+  }
+  
+  .text-headline {
+    font-size: clamp(1.5rem, 8vw, 3rem);
+  }
 }
 
 /* Grid pattern background */

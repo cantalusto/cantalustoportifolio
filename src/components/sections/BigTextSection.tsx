@@ -44,10 +44,10 @@ export default function BigTextSection() {
   return (
     <section
       ref={containerRef}
-      className="relative py-48 md:py-64 overflow-hidden bg-foreground"
+      className="relative py-24 md:py-64 overflow-hidden bg-foreground"
     >
       <motion.div
-        className="flex flex-col items-center gap-4"
+        className="flex flex-col items-center gap-2 md:gap-4"
         style={{ x, opacity }}
         variants={containerVariants}
         initial="hidden"
@@ -57,9 +57,9 @@ export default function BigTextSection() {
         {words.map((word, index) => (
           <div key={index} className="overflow-hidden">
             <motion.span
-              className={`block text-[15vw] font-black leading-[0.85] tracking-tighter ${
+              className={`block text-[12vw] md:text-[15vw] font-black leading-[0.85] tracking-tighter ${
                 index === 1
-                  ? "text-transparent [-webkit-text-stroke:2px_#f5f5f5]"
+                  ? "text-transparent [-webkit-text-stroke:1px_#f5f5f5] md:[-webkit-text-stroke:2px_#f5f5f5]"
                   : "text-background"
               }`}
               variants={wordVariants}
