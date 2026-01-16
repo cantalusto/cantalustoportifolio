@@ -56,7 +56,7 @@ export default function AboutSection() {
             {/* Stats */}
             <div className="grid grid-cols-3 gap-8 pt-12 border-t border-border">
               {[
-                { number: "5+", label: t("about.years") },
+                { number: "2+", label: t("about.years") },
                 { number: "50+", label: t("about.projects") },
                 { number: "20+", label: t("about.clients") },
               ].map((stat, index) => (

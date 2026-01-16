@@ -14,7 +14,7 @@ const projects = [
     categoryPt: "Landing Page • Next.js",
     descriptionEn: "Landing page with various animations",
     descriptionPt: "Landing page com várias animações",
-    year: "2024",
+    year: "2026",
     image: "/investlanding.png",
   },
   {
@@ -24,7 +24,7 @@ const projects = [
     categoryPt: "Site Institucional • Next.js",
     descriptionEn: "Institutional website with various animations",
     descriptionPt: "Site institucional com várias animações",
-    year: "2024",
+    year: "",
     image: "/digital.png",
   },
   {
@@ -34,7 +34,7 @@ const projects = [
     categoryPt: "Plataforma Pet • React, Node.js",
     descriptionEn: "Platform for pet lovers",
     descriptionPt: "Plataforma para amantes de pets",
-    year: "2024",
+    year: "",
     image: "/amigofiel.png",
   },
   {
@@ -44,7 +44,7 @@ const projects = [
     categoryPt: "Projeto Social • Aplicação Web",
     descriptionEn: "Social impact project",
     descriptionPt: "Projeto de impacto social",
-    year: "2024",
+    year: "",
     image: "/esperanca.png",
   },
 ];
